@@ -3,5 +3,6 @@
 Practical assigment #2
 
 
-![Animation](https://user-images.githubusercontent.com/70802112/213557513-0bbb1053-a402-440f-bdd0-d159cde5f785.mp4)
+![dz2v17](https://user-images.githubusercontent.com/70802112/213557875-0e05f1f1-99f1-4c28-b50b-976a372db837.gif)
+
 
