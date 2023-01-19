@@ -2,5 +2,6 @@
 
 Practical assigment #2
 
-![dz2v17](https://user-images.githubusercontent.com/70802112/213560374-4ace1394-df3d-4b92-bebc-08d47d20dfec.gif)
+![Animation](https://user-images.githubusercontent.com/70802112/213565852-9d18d1a5-2908-48a3-80b2-3dae14fbf6e7.gif)
+
 
