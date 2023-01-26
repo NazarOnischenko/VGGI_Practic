@@ -1,4 +1,5 @@
 # WebGL
 
-Practical assigment #1 (Surface Rendering) 
-Variant № 17
+Project that accompanies VGGI credit module.
+
+Visit vggi-kpi.blogspot.com for more information
