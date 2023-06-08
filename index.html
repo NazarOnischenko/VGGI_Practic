@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+  <title>PA#1</title>
+  <style>
+    body {
+      background-color: #EEEEEE;
+    }
+  </style>
+
+  <script src="./Utils/trackball-rotator.js"></script>
+  <script src="./Utils/m4.js"></script>
+  <script src="./shader.gpu"></script>
+  <script src="./main.js"></script>
+
+</head>
+
+<body onload="init()">
+  <input type="radio">
+
+  <h2>Surface of Revolution of a General Sinusoid</h2>
+
+  <p id="message">Drag your mouse on the cube to rotate it.<br>
+    (On a touch screen, you can use your finger.)</p>
+  <p id="message2"></p>
+
+
+  <div id="canvas-holder">
+    <canvas width="600" height="600" id="webglcanvas" style="background-color:red"></canvas><br>
+    <span>Eye separation</span>
+    <input type="range" value="70" min="10" max="100" step="5" id="e" />
+    <span class="cur">0</span><br>
+    <span>Field of View</span>
+    <input type="range" value="0.8" min="0.2" max="2.0" step="0.2" id="f" />
+    <span class="cur">0</span><br>
+    <span>Near Clipping Distance</span>
+    <input type="range" value="5" min="0" max="10" step="0.2" id="n" />
+    <span class="cur">0</span><br>
+    <span>Convergence</span>
+    <input type="range" value="2000" min="400" max="3600" step="200" id="c" />
+    <span class="cur">0</span>
+  </div>
+
+
+</body>
+
+</html>
