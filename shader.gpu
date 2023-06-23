@@ -1,12 +1,73 @@
-
-
 // Vertex shader
 const vertexShaderSource = `
 attribute vec3 vertex;
+attribute vec2 vertexTexture;
 uniform mat4 ModelViewProjectionMatrix;
+varying vec2 v_texcoord;
+uniform float b;
+
+uniform vec3 translateSphere;
+uniform vec2 userPoint;
+uniform float magnit;
+
+mat4 translation(float tx, float ty, float tz) {
+    mat4 dst;
+
+    dst[0][0] = 1.0;
+    dst[0][ 1] = 0.0;
+    dst[0][ 2] = 0.0;
+    dst[0][ 3] = 0.0;
+    dst[1][ 0] = 0.0;
+    dst[1][ 1] = 1.0;
+    dst[1][ 2] = 0.0;
+    dst[1][ 3] = 0.0;
+    dst[2][ 0] = 0.0;
+    dst[2][ 1] = 0.0;
+    dst[2][ 2] = 1.0;
+    dst[2][ 3] = 0.0;
+    dst[3][ 0] = tx;
+    dst[3][ 1] = ty;
+    dst[3][ 2] = tz;
+    dst[3][ 3] = 1.0;
+    return dst;
+}
+
+mat4 scale(float s){
+    mat4 dst;
+
+    dst[0][0] = s;
+    dst[0][ 1] = 0.0;
+    dst[0][ 2] = 0.0;
+    dst[0][ 3] = 0.0;
+    dst[1][ 0] = 0.0;
+    dst[1][ 1] = s;
+    dst[1][ 2] = 0.0;
+    dst[1][ 3] = 0.0;
+    dst[2][ 0] = 0.0;
+    dst[2][ 1] = 0.0;
+    dst[2][ 2] = s;
+    dst[2][ 3] = 0.0;
+    dst[3][ 0] = 0.0;
+    dst[3][ 1] = 0.0;
+    dst[3][ 2] = 0.0;
+    dst[3][ 3] = 1.0;
+
+    return dst;
+}
 
 void main() {
-    gl_Position = ModelViewProjectionMatrix * vec4(vertex,1.0);
+    mat4 sMatrix = scale(magnit);
+    mat4 tMatrix1 = translation(userPoint.x,userPoint.y,0.0);
+    mat4 tMatrix2 = translation(-userPoint.x,-userPoint.y,0.0);
+    vec4 textureT1 = vec4(vertexTexture,0.,0.)*tMatrix1;
+    vec4 textureS = textureT1*sMatrix;
+    vec4 textureT2 = textureS*tMatrix2;
+    v_texcoord = vec2(textureT2.x,textureT2.y);
+    gl_Position = ModelViewProjectionMatrix * vec4(vertex, 1.0);
+    if(b>0.0){
+      vec4 sphere = translation(translateSphere.x,translateSphere.y,translateSphere.z)*vec4(vertex,1.0);
+      gl_Position=ModelViewProjectionMatrix*sphere;
+    }
 }`;
 
 // Fragment shader
@@ -17,7 +78,14 @@ const fragmentShaderSource = `
    precision mediump float;
 #endif
 
-uniform vec4 color;
+varying vec2 v_texcoord;
+uniform sampler2D tmu;
+uniform float b;
+
 void main() {
-    gl_FragColor = color;
+    vec4 texColor = texture2D(tmu, v_texcoord);
+    gl_FragColor = texColor;
+    if(b>0.){
+        gl_FragColor = vec4(1.,1.,1.,1.);
+    }
 }`;
